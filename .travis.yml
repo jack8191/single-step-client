@@ -1,0 +1,12 @@
+language: node_js
+node_js: node
+cache: 
+directories:
+- node_modules
+deploy:
+  provider: heroku
+  api_key:
+    secure: lKddxeN3LmHvmctpSpvbVDdcsFjxcl/jEgA18KG9y3hqBanu36uUS9MkHROMn6tdqQ0km0ys4AuSMJomqg2oVneaHJi5AVaVYZBZWrgfB2sKtr7ahWKH1nvW/pTrNSrochS3pxw1oj/Y7lesmdybqOZHmEG68TcdyCEgcrVBtYXEiqNA6nXqbpqW5Pk0niSJjBRIcVmLe3bLYcPd6TwmVoAVckMXWeU6TU524knlO4G2yIclRwYHhKxkjLXL0FHTGWZD37D9KI4sNVqJSrJnAxTZ3TVNtV9wStUMRLxhrsl+CGtJrgi3159fLzCIutJ43kQBm8Hc1uwUCW3kUIY4Y1fb0cfSOAZpRDiTuvYdybc+Fb/VCtRXaumMldwJkDBHuWiESnnhzTRX8SX90FC2TwlpHJOPtUgAiZ/Za/iOZE2k4tZ6Wd+8CNzaMwf/UmKw9ChkiWYdEy75vBmVUW95d/eSmmn3LS3YRQMM7tTdagMuk43Dif7LnQ345i8JRBf57nBaBJmajQetSKtcqAAIwG7ZMGntakFh9llnjBzarx9CwSZGzmPuZadwvKgRR6GOKBnb0xvs6m1fAOd/7JyMe4knWNZBD58n3DUbmQvyA9rkHUtIabplpd0uWWKMUu9HYInYgDtXs/nfpGcmTBvTWhk8yr3w/cpj1PF5gP1+UEk=
+  app: pure-depths-96483
+  on:
+    repo: jack8191/single-step-client
