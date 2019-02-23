@@ -1,18 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
+import {fetchGoals} from '../actions/actions'
+
 export class Goals extends React.Component {
+    componentDidMount() {
+        this.props.dispatch(fetchGoals())
+    }
+    
     render() {
         const goalList = this.props.goals.map((goal, index) => {
             if (goal.complete === false) {
                 return(
-                <div className="goal">
+                <div className="goal" key={index}>
                     <h2>{goal.title}</h2>
-                    <ul>
-                        <li>Description: {goal.description}</li>
-                        <li>Days Remaining: {goal.days}</li>
-                        <li>Progress: {goal.progress}/{goal.target}</li>
-                    </ul>
+                    <p>Description: {goal.description}</p>
+                    <p>Days Remaining: {goal.days}</p>
+                    <p>Progress: {goal.progress}/{goal.target}</p>
                     <button>Increment Total</button>
                     <button>Edit</button>
                     <button>Delete</button>
@@ -21,12 +25,10 @@ export class Goals extends React.Component {
             }
             else if (goal.complete === true) {
                 return(
-                    <div class="goal">
+                    <div className="goal" key={index}>
                         <h2>{goal.title}</h2>
-                        <ul>
-                            <li>You did it!</li>
-                            <li>{goal.reward}</li>
-                        </ul>
+                            <p>You did it!</p>
+                            <p>{goal.reward}</p>
                         <button>Delete</button>
                     </div>
                 )

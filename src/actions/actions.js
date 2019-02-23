@@ -6,15 +6,16 @@ export const fetchGoalsSuccess = goals => ({
     goals
 })
 
-export const fetchGoals = () => {
+export const fetchGoals = () => dispatch => {
     fetch(`${API_BASE_URL}/goals`)
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText)
             }
+            console.log(res)
             return res.json()
         })
-        .then(goals => {
+        .then(goals => { 
             dispatch(fetchGoalsSuccess(goals))
         })
 }
