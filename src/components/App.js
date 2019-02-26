@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {refreshAuthToken} from '../actions/auth';
 
 import {
   BrowserRouter as Router,
@@ -9,8 +10,36 @@ import {
 } from 'react-router-dom'
 
 import Goals from './goals'
+import RegistrationPage from './registration-page';
 
 class App extends Component {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.loggedIn && this.props.loggedIn) {
+        this.startPeriodicRefresh();
+    } else if (prevProps.loggedIn && !this.props.loggedIn) {
+        this.stopPeriodicRefresh();
+    }
+}
+
+componentWillUnmount() {
+    this.stopPeriodicRefresh();
+}
+
+startPeriodicRefresh() {
+    this.refreshInterval = setInterval(
+        () => this.props.dispatch(refreshAuthToken()),
+        60 * 60 * 1000 
+    );
+}
+
+stopPeriodicRefresh() {
+    if (!this.refreshInterval) {
+        return;
+    }
+
+    clearInterval(this.refreshInterval);
+}
+
   render() {
     return (
       <div className="App">
@@ -22,6 +51,7 @@ class App extends Component {
           <Route exact path="/goals" component={Goals}/>
           {/* <Route exact path="/login" component={Login}/>
           <Route exact path="/:goalId" component={GoalEdit}/> */}
+          <Route exact path="/register" component={RegistrationPage} />
         </main>
       </div>
     );
@@ -33,5 +63,10 @@ class App extends Component {
 //   loggedIn: state.auth.currentUser !== null
 // });withRouter(connect(mapStateToProps)
 
+const mapStateToProps = state => ({
+  hasAuthToken: state.auth.authToken !== null,
+  loggedIn: state.auth.currentUser !== null
+});
 
-export default (App);
+
+export default withRouter(connect(mapStateToProps)(App));

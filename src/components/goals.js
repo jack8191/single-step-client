@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {fetchGoals} from '../actions/actions'
+import {fetchGoals} from '../actions/app-actions'
 
 export class Goals extends React.Component {
     componentDidMount() {
