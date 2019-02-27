@@ -5,12 +5,12 @@ import {fetchGoals} from '../actions/app-actions'
 
 export class Goals extends React.Component {
     componentDidMount() {
-        this.props.dispatch(fetchGoals())
+        this.props.dispatch(fetchGoals(this.props.currentUser))
+        console.log(this.props)
     }
     
     render() {
         const goalList = this.props.goals.map((goal, index) => {
-            if (goal.complete === false) {
                 return(
                 <div className="goal" key={index}>
                     <h2>{goal.title}</h2>
@@ -22,17 +22,6 @@ export class Goals extends React.Component {
                     <button>Delete</button>
                 </div>
                 )
-            }
-            else if (goal.complete === true) {
-                return(
-                    <div className="goal" key={index}>
-                        <h2>{goal.title}</h2>
-                            <p>You did it!</p>
-                            <p>{goal.reward}</p>
-                        <button>Delete</button>
-                    </div>
-                )
-            }
         })
         console.log(goalList)
         return (
@@ -45,7 +34,8 @@ export class Goals extends React.Component {
 
 
 const mapStateToProps = state => ({
-    goals: state.goals
+    goals: state.app.goals,
+    currentUser: state.auth.currentUser.username
 })
 
 export default connect(mapStateToProps)(Goals)

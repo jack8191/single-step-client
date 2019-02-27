@@ -1,8 +1,7 @@
 import * as actions from '../actions/app-actions'
 
 const initialState = {
-    goals: [
-    ]
+    goals: []
 }
 
 export const appReducer = (state=initialState, action) => {

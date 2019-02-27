@@ -11,6 +11,7 @@ import {
 
 import Goals from './goals'
 import RegistrationPage from './registration-page';
+import LoginPage from './login-page'
 
 class App extends Component {
   componentDidUpdate(prevProps) {
@@ -49,8 +50,8 @@ stopPeriodicRefresh() {
           {/* <Route exact path="/" component={Landing}/>
           <Route path="/create" component={GoalCreator}/> */}
           <Route exact path="/goals" component={Goals}/>
-          {/* <Route exact path="/login" component={Login}/>
-          <Route exact path="/:goalId" component={GoalEdit}/> */}
+          <Route exact path="/login" component={LoginPage}/>
+          {/* <Route exact path="/:goalId" component={GoalEdit}/> */}
           <Route exact path="/register" component={RegistrationPage} />
         </main>
       </div>
