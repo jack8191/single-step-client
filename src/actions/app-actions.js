@@ -6,6 +6,26 @@ export const fetchGoalsSuccess = goals => ({
     goals
 })
 
+export const DELETE_GOALS_SUCCESS = 'DELETE_GOALS_SUCCESS'
+export const deleteGoalsSuccess = () => ({
+    type: DELETE_GOALS_SUCCESS
+})
+
+export const deleteGoal = (goalId) => dispatch => {
+    fetch(`${API_BASE_URL}/goals/${goalId}`, {
+        method: 'delete'
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.statusText)
+            }
+            return res
+        })
+        .then(res => {
+            dispatch(deleteGoalsSuccess())
+        })
+}
+
 export const fetchGoals = (currentUser) => dispatch => {
     fetch(`${API_BASE_URL}/goals/${currentUser}`)
         .then(res => {

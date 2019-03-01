@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {fetchGoals} from '../actions/app-actions'
+import {fetchGoals, deleteGoal} from '../actions/app-actions'
 
 export class Goals extends React.Component {
     componentDidMount() {
@@ -9,6 +9,12 @@ export class Goals extends React.Component {
         console.log(this.props)
     }
     
+    onClick(e) {
+        e.preventDefault()
+        this.props.dispatch(deleteGoal(e.target.className))
+        this.props.dispatch(fetchGoals(this.props.currentUser))
+    }
+
     render() {
         const goalList = this.props.goals.map((goal, index) => {
                 return(
@@ -19,7 +25,7 @@ export class Goals extends React.Component {
                     <p>Progress: {goal.progress}/{goal.target}</p>
                     <button>Increment Total</button>
                     <button>Edit</button>
-                    <button>Delete</button>
+                    <button className={goal.id} onClick={(e) => this.onClick(e)}>Delete</button>
                 </div>
                 )
         })
