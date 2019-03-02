@@ -11,9 +11,13 @@ export const deleteGoalsSuccess = () => ({
     type: DELETE_GOALS_SUCCESS
 })
 
-export const deleteGoal = (goalId) => dispatch => {
+export const deleteGoal = (goalId) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken
     fetch(`${API_BASE_URL}/goals/${goalId}`, {
-        method: 'delete'
+        method: 'delete',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
     })
         .then(res => {
             if (!res.ok) {
@@ -26,8 +30,14 @@ export const deleteGoal = (goalId) => dispatch => {
         })
 }
 
-export const fetchGoals = (currentUser) => dispatch => {
-    fetch(`${API_BASE_URL}/goals/${currentUser}`)
+export const fetchGoals = (currentUser) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken
+    fetch(`${API_BASE_URL}/goals/${currentUser}`, {
+        method: 'get',
+        headers: {
+            Authorization: `Bearer ${authToken}`
+        }
+    })
         .then(res => {
             if (!res.ok) {
                 return Promise.reject(res.statusText)
