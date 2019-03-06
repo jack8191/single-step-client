@@ -4,15 +4,26 @@ import {connect} from 'react-redux'
 import {fetchGoals, deleteGoal} from '../actions/app-actions'
 
 export class Goals extends React.Component {
+    
     componentDidMount() {
+        console.log(this.props)
         this.props.dispatch(fetchGoals(this.props.currentUser))
         console.log(this.props)
+        window.addEventListener('beforeunload', this.handleRefresh.bind(this))
     }
     
-    onClick(e) {
-        e.preventDefault()
-        this.props.dispatch(deleteGoal(e.target.className))
-        this.props.dispatch(fetchGoals(this.props.currentUser))
+    componentWillUnmount() {
+        window.removeEventListener('beforeunload', this.handleRefresh.bind(this))
+    }
+
+    handleRefresh() {
+        this.props.dispatch(fetchGoals(this.props.c))
+    }
+
+    onClick(goalId) {
+        this.props.dispatch(deleteGoal(goalId))
+            .then(() =>
+            this.props.dispatch(fetchGoals()))
     }
 
     render() {
@@ -25,11 +36,10 @@ export class Goals extends React.Component {
                     <p>Progress: {goal.progress}/{goal.target}</p>
                     <button>Increment Total</button>
                     <button>Edit</button>
-                    <button className={goal.id} onClick={(e) => this.onClick(e)}>Delete</button>
+                    <button onClick={(e) => this.onClick(goal.id)}>Delete</button>
                 </div>
                 )
         })
-        console.log(goalList)
         return (
             <div className="goal-list">
                 {goalList}

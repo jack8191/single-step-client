@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom'
 
 import Goals from './goals'
+import GoalCreationPage from './goal-creation-page'
 import RegistrationPage from './registration-page';
 import LoginPage from './login-page'
 
@@ -47,8 +48,8 @@ stopPeriodicRefresh() {
         <header className="App-header">
         </header>
         <main>
-          {/* <Route exact path="/" component={Landing}/>
-          <Route path="/create" component={GoalCreator}/> */}
+          {/* <Route exact path="/" component={Landing}/> */}
+          <Route exact path="/create" component={GoalCreationPage}/>
           <Route exact path="/goals" component={Goals}/>
           <Route exact path="/login" component={LoginPage}/>
           {/* <Route exact path="/:goalId" component={GoalEdit}/> */}
