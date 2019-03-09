@@ -1,6 +1,7 @@
 import React from 'react'
 import {Field, reduxForm, focus} from 'redux-form'
 import Input from './input'
+import {connect} from 'react-redux'
 import {submitNewGoal} from '../actions/app-actions'
 import {required, nonEmpty, isTrimmed, notToday, notZero} from '../validators'
 
@@ -8,7 +9,7 @@ export class GoalCreationForm extends React.Component {
     onSubmit(values) {
         const {title, description, targetDate, target, reward} = values
         const newGoal = {title, description, targetDate, target, reward}
-        return this.props.dispatch(submitNewGoal(newGoal))
+        return this.props.dispatch(submitNewGoal(newGoal, this.props.userId, this.props.username))
     }
 
     render() {
@@ -58,8 +59,19 @@ export class GoalCreationForm extends React.Component {
     }
 }
 
+const mapStateToProps = (state, props) => {
+    return {
+        userId: state.auth.currentUser.userId,
+        username: state.auth.currentUser.username
+    }
+}
+
+GoalCreationForm = connect(
+    mapStateToProps
+)(GoalCreationForm)
+
 export default reduxForm({
     form: 'goalCreation',
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('goalCreation', Object.keys(errors)[0]))
+    // onSubmitFail: (errors, dispatch) =>
+    //     dispatch(focus('goalCreation', Object.keys(errors)[0]))
 })(GoalCreationForm)

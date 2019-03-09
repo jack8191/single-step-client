@@ -2,7 +2,7 @@ import * as actions from '../actions/app-actions'
 
 const initialState = {
     goals: [],
-    newGoal: false
+    newGoal: false,
 }
 
 
@@ -11,7 +11,7 @@ export const appReducer = (state=initialState, action) => {
         return {
             ...state,
             goals: action.goals,
-            newGoal: false
+            newGoal: false,
         }
     }
     else if (action.type === actions.DELETE_GOALS_SUCCESS) {
@@ -24,5 +24,9 @@ export const appReducer = (state=initialState, action) => {
             newGoal: true
         }
     }
+    // else if(action.type === actions.NAVIGATE_TO_GOAL_EDIT) {
+    //     return {
+    //         ...state        }
+    // }
     return state
 }

@@ -20,6 +20,19 @@ export const submitNewGoalSuccess = (goal) => ({
     goal
 })
 
+export const EDIT_GOAL_SUCCESS = 'EDIT_GOAL_SUCCESS'
+export const editGoalSuccess = (goal) => ({
+    type: EDIT_GOAL_SUCCESS,
+    goal
+})
+
+
+// export const NAVIGATE_TO_GOAL_EDIT = 'NAVIGATE_TO_GOAL_EDIT'
+// export const navigateToGoalEdit = preEditGoal => ({
+//     type: NAVIGATE_TO_GOAL_EDIT,
+//     preEditGoal
+// })
+
 export const deleteGoal = (goalId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken
    return  fetch(`${API_BASE_URL}/goals/${goalId}`, {
@@ -59,10 +72,9 @@ export const fetchGoals = (currentUser) => (dispatch) => {
         })
 }
 
-export const submitNewGoal = (newGoal) => (dispatch, localStorage) => {
-    const authToken = localStorage.auth.authToken
+export const submitNewGoal = (newGoal, authToken, isOwnedBy) => (dispatch) => {
+    //const authToken = localStorage.auth.authToken
     const thisStartDate = Date.now()
-    const isOwnedBy = localStorage.auth.currentUser.username
     const goalBody = { 
         title: newGoal.title, 
         description: newGoal.description,
@@ -80,6 +92,32 @@ export const submitNewGoal = (newGoal) => (dispatch, localStorage) => {
             'content-type': 'application/json'
         },
         body: JSON.stringify(goalBody)
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(res => dispatch(editGoalSuccess(res)))
+        .catch(err => {
+            const {reason, message, location} = err;
+            if (reason === 'ValidationError') {
+                // Convert ValidationErrors into SubmissionErrors for Redux Form
+                return Promise.reject(
+                    new SubmissionError({
+                        [location]: message
+                    })
+                );
+            }
+        })
+}
+
+export const editGoal = (editedGoal, goalId) => (dispatch, localStorage) => {
+    const authToken = localStorage.auth.authToken
+    return fetch(`${API_BASE_URL}/${goalId}`, {
+        method: 'patch',
+        headers: {
+            Authorization: `Bearer ${authToken}`,
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(editedGoal)
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
