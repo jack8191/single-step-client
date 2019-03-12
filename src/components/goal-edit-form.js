@@ -3,7 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form'
 import {connect} from 'react-redux'
 import Input from './input'
 import {editGoal} from '../actions/app-actions'
-import {isTrimmed, notToday, notZero} from '../validators'
+import {notToday, notZero} from '../validators'
 
 export class GoalEditForm extends React.Component { 
     whenSubmit(values) {
@@ -15,6 +15,7 @@ export class GoalEditForm extends React.Component {
         //         newGoal.key = values.key
         //     }
         // }
+        console.log(editedGoal, this.props.goalId, this.props.authToken)
         return this.props.dispatch(editGoal(editedGoal, this.props.goalId))
     }
 
@@ -22,28 +23,27 @@ export class GoalEditForm extends React.Component {
         return (
             <form
                 className="edit-goal-form"
-                onSubmit={this.whenSubmit(values => (values)
-                )}>
+                onSubmit={this.props.handleSubmit(values => this.whenSubmit(values))}>
                 <label htmlFor="title">Title</label>
                 <Field
                     component={Input}
                     type="text"
                     name="title"
-                    validate={[isTrimmed]}
+                    //validate={[isTrimmed]}
                 />
                 <label htmlFor="description">Description</label>
                 <Field
                     component={Input}
                     type="text"
                     name="description"
-                    validate={[isTrimmed]}
+                    //validate={[isTrimmed]}
                 />
                 <label htmlFor="targetDate">Completion Date</label>
                 <Field
                     component={Input}
                     type="date"
                     name="targetDate"
-                    validate={[notToday]}
+                    //validate={[notToday]}
                 />
                 <label htmlFor="progress">Current Progress</label>
                 <Field
@@ -64,7 +64,7 @@ export class GoalEditForm extends React.Component {
                     component={Input}
                     type="text"
                     name="reward"
-                    validate={[isTrimmed]}
+                    //validate={[isTrimmed]}
                 />
                 <button type="submit">Submit</button>
             </form>

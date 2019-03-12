@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {fetchGoals, deleteGoal, navigateToGoalEdit} from '../actions/app-actions'
+import {fetchGoals, deleteGoal, navigateToGoalEdit, editGoal} from '../actions/app-actions'
 import {Redirect, Link} from 'react-router-dom'
 
 export class Goals extends React.Component {
@@ -27,6 +27,10 @@ export class Goals extends React.Component {
             this.props.dispatch(fetchGoals()))
     }
 
+    onIncrementClick(progress, goalId) {
+        this.props.dispatch(editGoal({progress: progress++}, goalId))
+    }
+
     // onEditClick(goalId) {
     //     <Redirect to={`/goaledit/${goalId}`} />
     // }
@@ -34,17 +38,45 @@ export class Goals extends React.Component {
     
     render() {
         const goalList = this.props.goals.map((goal, index) => {
-            return(
-                <div className="goal" key={index}>
-                <h2>{goal.title}</h2>
-                <p>Description: {goal.description}</p>
-                <p>Days Remaining: {goal.days}</p>
-                <p>Progress: {goal.progress}/{goal.target}</p>
-                <button>Increment Total</button>
-                <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
-                <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
-            </div>
-            )
+            if (goal.progress === goal.target) {
+                return (
+                    <div className="goal" key={index}>
+                        <h2>Congradulations!</h2>
+                        <p>You've completed {goal.title}!</p>
+                        <p>Here's your reward! {goal.reward}</p>
+                        <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
+                    </div>
+                )
+            }
+            else if (goal.targetDate >= Date.now()) {
+                return (
+                    <div className="goal" key={index}>
+                    <h2>{goal.title}</h2>
+                    <p>Description: {goal.description}</p>
+                    <p>To be finished by: {goal.targetDate}</p>
+                    <p>Looks like you've missed your target date. No worries! 
+                        Keep adding to that progress and your reward waits regardless!
+                    </p>
+                    <p>Progress: {goal.progress}/{goal.target}</p>
+                    <button>Increment Total</button>
+                    <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
+                    <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
+                </div>
+                )
+            }
+            else {
+                return(
+                    <div className="goal" key={index}>
+                        <h2>{goal.title}</h2>
+                        <p>Description: {goal.description}</p>
+                        <p>Days Remaining: {goal.days}</p>
+                        <p>Progress: {goal.progress}/{goal.target}</p>
+                        <button>Increment Total</button>
+                        <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
+                        <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
+                    </div>
+                )
+            }
         })
             return (
                 <div className="goal-list">

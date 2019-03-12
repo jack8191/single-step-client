@@ -15,7 +15,9 @@ export const appReducer = (state=initialState, action) => {
         }
     }
     else if (action.type === actions.DELETE_GOALS_SUCCESS) {
-        return null
+        return {
+            ...state
+        }
     }
     else if (action.type === actions.SUBMIT_NEW_GOAL_SUCCESS) {
         return {

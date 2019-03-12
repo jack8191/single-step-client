@@ -2,8 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
 import {fetchGoals} from '../actions/app-actions'
+import {editGoal} from '../actions/app-actions'
 
-import {GoalEditForm} from './goal-edit-form'
+import GoalEditForm from './goal-edit-form'
 
 export class GoalEditPage extends React.Component {
     static defaultProps = {
@@ -33,7 +34,7 @@ export class GoalEditPage extends React.Component {
                     <p>Completion goal: {this.props.goalToEdit.target}</p>
                     <p>Reward: {this.props.goalToEdit.reward}</p>
                 </div>
-                <GoalEditForm goalId={this.props.goalToEdit.id}/>
+                <GoalEditForm goalId={this.props.goalToEdit.id} authToken={this.props.authToken}/>
             </div>
         )
     }
@@ -42,9 +43,10 @@ export class GoalEditPage extends React.Component {
 const mapStateToProps = (state, props) => {
     const goalId = props.match.params.goalId
     const goal = state.app.goals.find(goal => goal.id === goalId)
-    console.log(goalId)
-    console.log(goal)
+    // console.log(goalId)
+    // console.log(goal)
     return {
+        authToken: state.auth.authToken,
         currentUser: state.auth.currentUser.username,
         goalToEdit: goal,
         goals: state.app.goals

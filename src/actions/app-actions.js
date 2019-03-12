@@ -109,10 +109,10 @@ export const submitNewGoal = (newGoal, authToken, isOwnedBy) => (dispatch) => {
         })
 }
 
-export const editGoal = (editedGoal, goalId) => (dispatch, localStorage) => {
-    const authToken = localStorage.auth.authToken
-    return fetch(`${API_BASE_URL}/${goalId}`, {
-        method: 'patch',
+export const editGoal = (editedGoal, goalId) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken
+    return fetch(`${API_BASE_URL}/goals/${goalId}`, {
+        method: 'PATCH',
         headers: {
             Authorization: `Bearer ${authToken}`,
             'content-type': 'application/json'
@@ -121,7 +121,7 @@ export const editGoal = (editedGoal, goalId) => (dispatch, localStorage) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(res => dispatch(submitNewGoalSuccess(res)))
+        .then(res => dispatch(editGoalSuccess(res)))
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
