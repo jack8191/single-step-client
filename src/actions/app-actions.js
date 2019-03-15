@@ -10,8 +10,9 @@ export const fetchGoalsSuccess = goals => ({
 })
 
 export const DELETE_GOALS_SUCCESS = 'DELETE_GOALS_SUCCESS'
-export const deleteGoalsSuccess = () => ({
-    type: DELETE_GOALS_SUCCESS
+export const deleteGoalsSuccess = (goalId) => ({
+    type: DELETE_GOALS_SUCCESS,
+    goalId
 })
 
 export const SUBMIT_NEW_GOAL_SUCCESS = 'SUBMIT_NEW_GOAL_SUCCESS'
@@ -48,7 +49,7 @@ export const deleteGoal = (goalId) => (dispatch, getState) => {
             return res
         })
         .then(res => {
-            dispatch(deleteGoalsSuccess())
+            dispatch(deleteGoalsSuccess(goalId))
         })
 }
 
@@ -72,8 +73,8 @@ export const fetchGoals = (currentUser) => (dispatch) => {
         })
 }
 
-export const submitNewGoal = (newGoal, authToken, isOwnedBy) => (dispatch) => {
-    //const authToken = localStorage.auth.authToken
+export const submitNewGoal = (newGoal, isOwnedBy) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken
     const thisStartDate = Date.now()
     const goalBody = { 
         title: newGoal.title, 
@@ -95,7 +96,7 @@ export const submitNewGoal = (newGoal, authToken, isOwnedBy) => (dispatch) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(res => dispatch(editGoalSuccess(res)))
+        .then(res => dispatch(submitNewGoalSuccess(res)))
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {

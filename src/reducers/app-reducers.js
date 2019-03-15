@@ -15,8 +15,14 @@ export const appReducer = (state=initialState, action) => {
         }
     }
     else if (action.type === actions.DELETE_GOALS_SUCCESS) {
+        console.log(state)
+
+        const newGoalList = state.goals.filter(function(el) {
+            return el.id !== action.goalId
+        })
         return {
-            ...state
+            ...state,
+            goals: newGoalList
         }
     }
     else if (action.type === actions.SUBMIT_NEW_GOAL_SUCCESS) {
@@ -26,9 +32,23 @@ export const appReducer = (state=initialState, action) => {
             newGoal: true
         }
     }
-    // else if(action.type === actions.NAVIGATE_TO_GOAL_EDIT) {
-    //     return {
-    //         ...state        }
-    // }
+    else if(action.type === actions.EDIT_GOAL_SUCCESS) {
+        console.log(action.goal)
+        console.log(state.goals)
+        const newGoalList = state.goals.map(function(goal) {
+            if (goal.id === action.goal.id) {
+                console.log(goal)
+                return action.goal
+            }
+            else {
+                return goal
+            }
+            console.log(newGoalList)
+        })
+        return {
+            ...state,
+            goals: newGoalList      
+        }
+    }
     return state
 }

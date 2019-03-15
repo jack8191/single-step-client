@@ -9,7 +9,7 @@ export class GoalCreationForm extends React.Component {
     onSubmit(values) {
         const {title, description, targetDate, target, reward} = values
         const newGoal = {title, description, targetDate, target, reward}
-        return this.props.dispatch(submitNewGoal(newGoal, this.props.userId, this.props.username))
+        return this.props.dispatch(submitNewGoal(newGoal, this.props.username))
     }
 
     render() {

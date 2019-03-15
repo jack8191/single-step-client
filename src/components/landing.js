@@ -16,7 +16,7 @@ export function LandingPage(props) {
                 50 eggs, write your novel.
             </p>
             <p>Create a target number and a completion date. The target
-                number represents instances completed.
+                number represents a seperate time you completed a goal-realated activity.
             </p>
             <p>
                 Finally, create a reward. This can be a link to the product 

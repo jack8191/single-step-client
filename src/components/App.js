@@ -14,6 +14,8 @@ import GoalCreationPage from './goal-creation-page'
 import RegistrationPage from './registration-page';
 import LoginPage from './login-page'
 import GoalEditPage from './goal-edit-page'
+import LandingPage from './landing'
+import NavBar from './nav-bar'
 
 class App extends Component {
   componentDidUpdate(prevProps) {
@@ -47,9 +49,10 @@ stopPeriodicRefresh() {
     return (
       <div className="App">
         <header className="App-header">
+        <NavBar />
         </header>
         <main>
-          {/* <Route exact path="/" component={Landing}/> */}
+          <Route exact path="/" component={LandingPage}/>
           <Route exact path="/create" component={GoalCreationPage}/>
           <Route exact path="/goals" component={Goals}/>
           <Route exact path="/login" component={LoginPage}/>

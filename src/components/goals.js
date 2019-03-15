@@ -23,12 +23,14 @@ export class Goals extends React.Component {
 
     onDeleteClick(goalId) {
         this.props.dispatch(deleteGoal(goalId))
-            .then(() =>
-            this.props.dispatch(fetchGoals()))
+            // .then(() =>
+            // this.props.dispatch(fetchGoals()))
     }
 
-    onIncrementClick(progress, goalId) {
-        this.props.dispatch(editGoal({progress: progress++}, goalId))
+    onIncrementClick(currentProgress, goalId) {
+        const incrementedProgress = ++currentProgress
+        console.log({progress: incrementedProgress})
+        this.props.dispatch(editGoal({progress: incrementedProgress}, goalId))
     }
 
     // onEditClick(goalId) {
@@ -38,10 +40,10 @@ export class Goals extends React.Component {
     
     render() {
         const goalList = this.props.goals.map((goal, index) => {
-            if (goal.progress === goal.target) {
+            if (goal.progress >= goal.target) {
                 return (
                     <div className="goal" key={index}>
-                        <h2>Congradulations!</h2>
+                        <h2>Congratulations!</h2>
                         <p>You've completed {goal.title}!</p>
                         <p>Here's your reward! {goal.reward}</p>
                         <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
@@ -49,29 +51,33 @@ export class Goals extends React.Component {
                 )
             }
             else if (goal.targetDate >= Date.now()) {
+                const targetDate = new Date(goal.targetDate)
+                const readableDate = targetDate.toDateString()
                 return (
                     <div className="goal" key={index}>
                     <h2>{goal.title}</h2>
                     <p>Description: {goal.description}</p>
-                    <p>To be finished by: {goal.targetDate}</p>
+                    <p>To be finished by: {readableDate}</p>
                     <p>Looks like you've missed your target date. No worries! 
                         Keep adding to that progress and your reward waits regardless!
                     </p>
                     <p>Progress: {goal.progress}/{goal.target}</p>
-                    <button>Increment Total</button>
+                    <button onClick={(e) => this.onIncrementClick(goal.progress, goal.id)}>Single Step!</button>
                     <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
                     <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
                 </div>
                 )
             }
             else {
+                const targetDate = new Date(goal.targetDate)
+                const readableDate = targetDate.toDateString()
                 return(
                     <div className="goal" key={index}>
                         <h2>{goal.title}</h2>
                         <p>Description: {goal.description}</p>
-                        <p>Days Remaining: {goal.days}</p>
+                        <p>To be finished by: {readableDate}</p>
                         <p>Progress: {goal.progress}/{goal.target}</p>
-                        <button>Increment Total</button>
+                        <button onClick={(e) => this.onIncrementClick(goal.progress, goal.id)}>Single Step!</button>
                         <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
                         <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
                     </div>
