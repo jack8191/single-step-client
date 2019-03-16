@@ -4,9 +4,9 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 
 export function LandingPage(props) {
-    if(props.loggedIn) {
-        return <Redirect to="/goals" />
-    }
+    // if(props.loggedIn) {
+    //     return <Redirect to="/goals" />
+    // }
     return(
         <div className="landing">
             <h2>Welcome to Single Step</h2>

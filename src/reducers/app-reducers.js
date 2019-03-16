@@ -3,6 +3,7 @@ import * as actions from '../actions/app-actions'
 const initialState = {
     goals: [],
     newGoal: false,
+    editedGoal: false
 }
 
 
@@ -12,6 +13,7 @@ export const appReducer = (state=initialState, action) => {
             ...state,
             goals: action.goals,
             newGoal: false,
+            editedGoal: false
         }
     }
     else if (action.type === actions.DELETE_GOALS_SUCCESS) {
@@ -33,8 +35,6 @@ export const appReducer = (state=initialState, action) => {
         }
     }
     else if(action.type === actions.EDIT_GOAL_SUCCESS) {
-        console.log(action.goal)
-        console.log(state.goals)
         const newGoalList = state.goals.map(function(goal) {
             if (goal.id === action.goal.id) {
                 console.log(goal)
@@ -47,7 +47,8 @@ export const appReducer = (state=initialState, action) => {
         })
         return {
             ...state,
-            goals: newGoalList      
+            goals: newGoalList,
+            editedGoal: true      
         }
     }
     return state

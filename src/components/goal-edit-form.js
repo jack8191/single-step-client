@@ -8,7 +8,17 @@ import {notToday, notZero} from '../validators'
 export class GoalEditForm extends React.Component { 
     whenSubmit(values) {
         const {title, description, targetDate, target, reward} = values
-        const editedGoal = {title, description, targetDate, target, reward}
+        //const editedGoal = {title, description, targetDate, target, reward}
+        // const valuesKeys = Object.keys(values)
+        // const valuesValues = Object.values(values)
+        
+        // const editedGoal = values.map(function(value) {
+        //     if (value !== '') {
+        //         return value
+        //     }
+        //     console.log(editedGoal)
+        // })
+        const editedGoal = values
         // const newGoal = {}
         // for (const key in values) {
         //     if(values.key !== '') {

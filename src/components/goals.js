@@ -8,10 +8,17 @@ export class Goals extends React.Component {
     
     componentDidMount() {
         console.log(this.props)
-        this.props.dispatch(fetchGoals(this.props.currentUser))
+        if(this.props.currentUser !== undefined) {
+            this.props.dispatch(fetchGoals(this.props.currentUser))
+        }
         console.log(this.props)
        // window.addEventListener('beforeunload', this.handleRefresh.bind(this))
     }
+    // componentDidUpdate() {
+    //     if(this.props.currentUser === undefined) {
+    //         this.forceUpdate()
+    //     }
+    // }
     
     // componentWillUnmount() {
     //     window.removeEventListener('beforeunload', this.handleRefresh.bind(this))
@@ -55,7 +62,7 @@ export class Goals extends React.Component {
                 const readableDate = targetDate.toDateString()
                 return (
                     <div className="goal" key={index}>
-                    <h2>{goal.title}</h2>
+                    <h2>Titile: {goal.title}</h2>
                     <p>Description: {goal.description}</p>
                     <p>To be finished by: {readableDate}</p>
                     <p>Looks like you've missed your target date. No worries! 
@@ -73,7 +80,7 @@ export class Goals extends React.Component {
                 const readableDate = targetDate.toDateString()
                 return(
                     <div className="goal" key={index}>
-                        <h2>{goal.title}</h2>
+                        <h2>Title: {goal.title}</h2>
                         <p>Description: {goal.description}</p>
                         <p>To be finished by: {readableDate}</p>
                         <p>Progress: {goal.progress}/{goal.target}</p>

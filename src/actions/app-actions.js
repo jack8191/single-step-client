@@ -53,8 +53,8 @@ export const deleteGoal = (goalId) => (dispatch, getState) => {
         })
 }
 
-export const fetchGoals = (currentUser) => (dispatch) => {
-    const authToken = localStorage.authToken
+export const fetchGoals = (currentUser) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken
     return fetch(`${API_BASE_URL}/goals/${currentUser}`, {
         method: 'get',
         headers: {

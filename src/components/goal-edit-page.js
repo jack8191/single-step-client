@@ -22,8 +22,12 @@ export class GoalEditPage extends React.Component {
         // const completionYear = targetDate.getFullYear()
         // const completionMonth = targetDate.getMonth()
         // const completionDay = targetDate.getDate()
+
         const targetDate = new Date(this.props.goalToEdit.targetDate)
         const readableDate = targetDate.toDateString()
+        if (this.props.goalEditSuccessful) {
+            return <Redirect to="/goals"/>
+        }
         return (
             <div className="goalEdit">
                 <div className="preEditGoal goal">
@@ -49,7 +53,8 @@ const mapStateToProps = (state, props) => {
         authToken: state.auth.authToken,
         currentUser: state.auth.currentUser.username,
         goalToEdit: goal,
-        goals: state.app.goals
+        goals: state.app.goals,
+        goalEditSuccessful: state.app.editedGoal === true
     }
     
 }

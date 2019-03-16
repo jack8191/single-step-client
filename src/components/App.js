@@ -5,6 +5,7 @@ import {refreshAuthToken} from '../actions/auth';
 import {
   BrowserRouter as Router,
   Route,
+  Redirect,
   Link,
   withRouter
 } from 'react-router-dom'
