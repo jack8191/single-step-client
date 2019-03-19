@@ -49,10 +49,10 @@ stopPeriodicRefresh() {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-        <NavBar />
-        </header>
+        {/* <header className="App-header">
+        </header> */}
         <main>
+          <NavBar />
           <Route exact path="/" component={LandingPage}/>
           <Route exact path="/create" component={GoalCreationPage}/>
           <Route exact path="/goals" component={Goals}/>

@@ -8,17 +8,20 @@ export function GoalCreationPage(props) {
     if(props.goalSubmissionSuccessful) {
         return <Redirect to="/goals" />
     }
-    return (
-        <div className="goalSubmission">
-            <h2>Ready to make a new goal?</h2>
-            <GoalCreationForm />
-        </div>
-    )
+    
+    else {
+        return (
+            <div className="goalSubmission">
+                <h2>Ready to make a new goal?</h2>
+                <GoalCreationForm />
+            </div>
+        )}
 }
 
 const mapStateToProps = state => ({
     goals: state.app.goals,
-    goalSubmissionSuccessful: state.app.newGoal === true
+    goalSubmissionSuccessful: state.app.newGoal === true,
+    currentUser: state.auth.currentUser
 })
 
 export default connect(mapStateToProps)(GoalCreationPage)

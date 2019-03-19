@@ -8,8 +8,8 @@ export class Goals extends React.Component {
     
     componentDidMount() {
         console.log(this.props)
-        if(this.props.currentUser !== undefined) {
-            this.props.dispatch(fetchGoals(this.props.currentUser))
+        if(this.props.currentUser !== null) {
+            this.props.dispatch(fetchGoals(this.props.currentUser.username))
         }
         console.log(this.props)
        // window.addEventListener('beforeunload', this.handleRefresh.bind(this))
@@ -91,6 +91,9 @@ export class Goals extends React.Component {
                 )
             }
         })
+        // if (this.props.loggedOut) {
+        //     return <Redirect to='/' />
+        // }
             return (
                 <div className="goal-list">
                     {goalList}
@@ -102,7 +105,8 @@ export class Goals extends React.Component {
 
 const mapStateToProps = state => ({
     goals: state.app.goals,
-    currentUser: state.auth.currentUser.username
+    currentUser: state.auth.currentUser,
+    //loggedOut: state.auth.currentUser === null
 })
 
 //pass in full user object in props

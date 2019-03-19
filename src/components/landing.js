@@ -11,6 +11,11 @@ export function LandingPage(props) {
         <div className="landing">
             <h2>Welcome to Single Step</h2>
             <h3>A platform for creating and tracking personal goals</h3>
+            <p>It looks like you're either new, not logged in right now, or want to reread
+                this page! If so, you're in the right place!
+            </p>
+            <Link to="/register">Create an Account</Link>
+            <Link to="/login">Login</Link>
             <h4>How it Works</h4>
             <p>Create a goal. This can be anything. Go to the gym, eat
                 50 eggs, write your novel.
@@ -37,8 +42,6 @@ export function LandingPage(props) {
                 Remember, the journey of a thousand miles begins with...
                 A cliche!
             </p>
-            <Link to="/register">Create an Account</Link>
-            <Link to="/login">Login</Link>
         </div>
     )
 }
