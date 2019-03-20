@@ -16,13 +16,6 @@ export const matches = field => (value, allValues) =>
         ? undefined
         : 'Does not match';
 
-export const notToday = value => {
-    const today = Date.now()
-    if(value == today) {
-        return 'Pick a date after today'
-    }
-}
-
 export const notZero = value => {
     if (value === 0) {
         return 'Pick a number greater than zero'

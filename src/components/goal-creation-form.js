@@ -3,7 +3,7 @@ import {Field, reduxForm, focus} from 'redux-form'
 import Input from './input'
 import {connect} from 'react-redux'
 import {submitNewGoal} from '../actions/app-actions'
-import {required, nonEmpty, isTrimmed, notToday, notZero} from '../validators'
+import {required, nonEmpty, isTrimmed, notZero} from '../validators'
 
 export class GoalCreationForm extends React.Component {
     onSubmit(values) {
@@ -37,7 +37,7 @@ export class GoalCreationForm extends React.Component {
                     component={Input}
                     type="date"
                     name="targetDate"
-                    validate={[required, nonEmpty, notToday]}
+                    validate={[required, nonEmpty]}
                 />
                 <label htmlFor="target">How Many Times?</label>
                 <Field

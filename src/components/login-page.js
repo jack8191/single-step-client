@@ -4,7 +4,7 @@ import {Link, Redirect} from 'react-router-dom'
 
 import LoginForm from './login-form'
 
-export function RegistrationPage(props) {
+export function LoginPage(props) {
     // If we are logged in (which happens automatically when registration
     // is successful) redirect to the user's dashboard
     if (props.loggedIn) {
@@ -25,4 +25,4 @@ const mapStateToProps = state => ({
     loggedOut: state.auth.currentUser === null
 })
 
-export default connect(mapStateToProps)(RegistrationPage)
+export default connect(mapStateToProps)(LoginPage)

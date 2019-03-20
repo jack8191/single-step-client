@@ -7,11 +7,11 @@ import {Redirect, Link} from 'react-router-dom'
 export class Goals extends React.Component {
     
     componentDidMount() {
-        console.log(this.props)
+        //console.log(this.props)
         if(this.props.currentUser !== null) {
             this.props.dispatch(fetchGoals(this.props.currentUser.username))
         }
-        console.log(this.props)
+        //console.log(this.props)
        // window.addEventListener('beforeunload', this.handleRefresh.bind(this))
     }
     // componentDidUpdate() {
@@ -62,7 +62,7 @@ export class Goals extends React.Component {
                 const readableDate = targetDate.toDateString()
                 return (
                     <div className="goal" key={index}>
-                    <h2>Titile: {goal.title}</h2>
+                    <h2>Title: {goal.title}</h2>
                     <p>Description: {goal.description}</p>
                     <p>To be finished by: {readableDate}</p>
                     <p>Looks like you've missed your target date. No worries! 

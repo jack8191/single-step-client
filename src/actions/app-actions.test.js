@@ -1,4 +1,5 @@
-import {FETCH_GOALS_SUCCESS, 
+import {
+    FETCH_GOALS_SUCCESS, 
     fetchGoalsSuccess, 
     DELETE_GOALS_SUCCESS, 
     deleteGoalsSuccess,
@@ -13,7 +14,7 @@ import {FETCH_GOALS_SUCCESS,
 } 
 from './app-actions'
 
-import API_BASE_URL from '../config'
+import {API_BASE_URL} from '../config'
 
 import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
@@ -61,7 +62,7 @@ describe('editGoalSuccess', () => {
 describe('deleteGoal', () => {
     it('should dispatch deleteGoalSuccess', () => {
         const goalId = 5
-        const state = mockStore({auth: {authToken: 7}})
+        const store = mockStore({auth: {authToken: 7}})
 
         global.fetch = jest.fn().mockImplementation(() => 
             Promise.resolve({
@@ -69,11 +70,72 @@ describe('deleteGoal', () => {
             })
         )
         const dispatch = jest.fn()
-        const getState = state.getState 
+        const getState = store.getState 
         return deleteGoal(goalId)(dispatch, getState).then(() => {
             expect(dispatch).toHaveBeenCalledWith(deleteGoalsSuccess(goalId))
         })
     })
 })
 
+describe('fetchGoals', () => {
+    it('should dispatch fetchGoalsSuccess', () => {
+        const currentUser = 'wingus'
+        const store = mockStore({auth: {authToken: 7}})
+        const goalList = {goal: 'goal'}
+        global.fetch = jest.fn().mockImplementation(() => 
+            Promise.resolve({
+                ok: true,
+                json() {
+                    return goalList
+                }
+            })
+        )
+        const dispatch = jest.fn()
+        const getState = store.getState
+        return fetchGoals(currentUser)(dispatch, getState).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(fetchGoalsSuccess(goalList))
+        })
+    })
+})
 
+describe('submitNewGoal', () => {
+    it('should dispatch submitNewGoalSuccess', () => {
+        const newGoal = {title: 'newGoal'}
+        const isOwnedBy = 'wingus'
+        const store = mockStore({auth: {authToken: 7}})
+        global.fetch = jest.fn().mockImplementation(() =>
+            Promise.resolve({
+                ok: true,
+                json() {
+                    return newGoal
+                }
+            })
+        )
+        const dispatch = jest.fn()
+        const getState = store.getState
+        return submitNewGoal(newGoal, isOwnedBy)(dispatch, getState).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(submitNewGoalSuccess(newGoal))
+        })
+    })
+})
+
+describe('editGoal', () => {
+    it('should dispatch editGoalSuccess', () => {
+        const editedGoal = {title: 'six'}
+        const goalId = 5
+        const store = mockStore({auth: {authToken: 7}})
+        global.fetch = jest.fn().mockImplementation(() => 
+        Promise.resolve({
+            ok: true,
+            json() {
+                return editedGoal
+            }
+            })
+        )
+        const dispatch = jest.fn()
+        const getState = store.getState
+        return editGoal(editedGoal, goalId)(dispatch, getState).then(() => {
+            expect(dispatch).toHaveBeenCalledWith(editGoalSuccess(editedGoal))
+        })
+    })
+})

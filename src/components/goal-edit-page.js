@@ -30,7 +30,7 @@ export class GoalEditPage extends React.Component {
         return (
             <div className="goalEdit">
                 <div className="preEditGoal goal">
-                    <h2>{this.props.goalToEdit.title}</h2>
+                    <h2>Title: {this.props.goalToEdit.title}</h2>
                     <p>Description: {this.props.goalToEdit.description}</p>
                     <p>To be completed by: {readableDate}</p>
                     <p>Current progress: {this.props.goalToEdit.progress}</p>
