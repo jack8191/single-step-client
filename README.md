@@ -9,10 +9,10 @@ password: testpassword
 
 After logging in you will see the goal list screen, where in-progress and complete goals live.
 Here you can create a new goal, edit an in-progress goal, or delete a goal.
-![Goal List](screenshots/Screenshot from 2019-03-22-00-30-33.png)
+![Goal List](screenshots/Screenshot-from-2019-03-22-00-30-33.png)
 
 Editing and creating goals both use forms nearly identical. The differences is that all fields are required when creating a goal and the goal to be edited displays above the relevant form. 
-![Goal Creation](screenshots/Screenshot from 2019-03-22-00-35-00.png)
+![Goal Creation](screenshots/Screenshot-from-2019-03-22-00-35-00.png)
 
 I created this project to be a subject-agnostic habit-forming aid. Even taken further this project should always be light on metadata and complexity to contrast with more spcific activity tracking tools.
 
