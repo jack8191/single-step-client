@@ -1,30 +1,13 @@
 import React from 'react'
-import {Field, reduxForm, focus} from 'redux-form'
-import {connect} from 'react-redux'
+import {Field, reduxForm} from 'redux-form'
 import Input from './input'
 import {editGoal} from '../actions/app-actions'
-import {notToday, notZero} from '../validators'
+import {notZero} from '../validators'
 
 export class GoalEditForm extends React.Component { 
     whenSubmit(values) {
-        const {title, description, targetDate, target, reward} = values
-        //const editedGoal = {title, description, targetDate, target, reward}
-        // const valuesKeys = Object.keys(values)
-        // const valuesValues = Object.values(values)
-        
-        // const editedGoal = values.map(function(value) {
-        //     if (value !== '') {
-        //         return value
-        //     }
-        //     console.log(editedGoal)
-        // })
+        //const {title, description, targetDate, target, reward} = values
         const editedGoal = values
-        // const newGoal = {}
-        // for (const key in values) {
-        //     if(values.key !== '') {
-        //         newGoal.key = values.key
-        //     }
-        // }
         console.log(editedGoal, this.props.goalId, this.props.authToken)
         return this.props.dispatch(editGoal(editedGoal, this.props.goalId))
     }
@@ -82,18 +65,7 @@ export class GoalEditForm extends React.Component {
     }
 }
 
-// const mapStateToProps = (state, props) => {
-//     const goalId = props.match.params.goalId
-//     const goal = state.app.goals.find(goal => goal.id === goalId)
 
-//     return {
-//         goalId: goal.id
-//     }
-// }
-
-// GoalEditForm = connect(
-//     mapStateToProps
-// )(GoalEditForm)
 
 export default reduxForm({
     form: 'goalEdit',

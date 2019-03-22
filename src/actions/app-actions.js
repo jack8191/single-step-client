@@ -28,12 +28,6 @@ export const editGoalSuccess = (goal) => ({
 })
 
 
-// export const NAVIGATE_TO_GOAL_EDIT = 'NAVIGATE_TO_GOAL_EDIT'
-// export const navigateToGoalEdit = preEditGoal => ({
-//     type: NAVIGATE_TO_GOAL_EDIT,
-//     preEditGoal
-// })
-
 export const deleteGoal = (goalId) => (dispatch, getState) => {
     const authToken = getState().auth.authToken
    return  fetch(`${API_BASE_URL}/goals/${goalId}`, {
@@ -65,7 +59,6 @@ export const fetchGoals = (currentUser) => (dispatch, getState) => {
             if (!res.ok) {
                 return Promise.reject(res.statusText)
             }
-            //console.log(res.json())
             return res.json()
         })
         .then(goals => { 
@@ -100,7 +93,6 @@ export const submitNewGoal = (newGoal, isOwnedBy) => (dispatch, getState) => {
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
                 return Promise.reject(
                     new SubmissionError({
                         [location]: message
@@ -126,7 +118,6 @@ export const editGoal = (editedGoal, goalId) => (dispatch, getState) => {
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
-                // Convert ValidationErrors into SubmissionErrors for Redux Form
                 return Promise.reject(
                     new SubmissionError({
                         [location]: message

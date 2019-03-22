@@ -1,37 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {fetchGoals, deleteGoal, navigateToGoalEdit, editGoal} from '../actions/app-actions'
-import {Redirect, Link} from 'react-router-dom'
+import {fetchGoals, deleteGoal, editGoal} from '../actions/app-actions'
+import {Link} from 'react-router-dom'
 
 export class Goals extends React.Component {
     
     componentDidMount() {
-        //console.log(this.props)
         if(this.props.currentUser !== null) {
             this.props.dispatch(fetchGoals(this.props.currentUser.username))
         }
-        //console.log(this.props)
-       // window.addEventListener('beforeunload', this.handleRefresh.bind(this))
     }
-    // componentDidUpdate() {
-    //     if(this.props.currentUser === undefined) {
-    //         this.forceUpdate()
-    //     }
-    // }
-    
-    // componentWillUnmount() {
-    //     window.removeEventListener('beforeunload', this.handleRefresh.bind(this))
-    // }
-
-    // handleRefresh() {
-    //     this.props.dispatch(fetchGoals(this.props.c))
-    // }
 
     onDeleteClick(goalId) {
         this.props.dispatch(deleteGoal(goalId))
-            // .then(() =>
-            // this.props.dispatch(fetchGoals()))
     }
 
     onIncrementClick(currentProgress, goalId) {
@@ -39,10 +21,6 @@ export class Goals extends React.Component {
         console.log({progress: incrementedProgress})
         this.props.dispatch(editGoal({progress: incrementedProgress}, goalId))
     }
-
-    // onEditClick(goalId) {
-    //     <Redirect to={`/goaledit/${goalId}`} />
-    // }
     
     
     render() {
@@ -50,9 +28,10 @@ export class Goals extends React.Component {
             if (goal.progress >= goal.target) {
                 return (
                     <div className="goal" key={index}>
-                        <h2>Congratulations!</h2>
+                        <p className="app-speak">Congratulations!</p>
                         <p>You've completed {goal.title}!</p>
-                        <p>Here's your reward! {goal.reward}</p>
+                        <p className="app-speak">Your reward awaits!</p> 
+                        <p>{goal.reward}</p>
                         <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
                     </div>
                 )
@@ -62,17 +41,20 @@ export class Goals extends React.Component {
                 const readableDate = targetDate.toDateString()
                 return (
                     <div className="goal" key={index}>
-                    <h2>Title: {goal.title}</h2>
-                    <p>Description: {goal.description}</p>
-                    <p>To be finished by: {readableDate}</p>
-                    <p>Looks like you've missed your target date. No worries! 
-                        Keep adding to that progress and your reward waits regardless!
-                    </p>
-                    <p>Progress: {goal.progress}/{goal.target}</p>
-                    <button onClick={(e) => this.onIncrementClick(goal.progress, goal.id)}>Single Step!</button>
-                    <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
-                    <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
-                </div>
+                        <p className="app-speak">Title: </p>
+                        <p>{goal.title}</p>
+                        <p className="app-speak">Description: </p>
+                        <p>{goal.description}</p>
+                        <p className="app-speak">To be completed by: </p>
+                        <p>{readableDate}</p>
+                        <p className="app-speak">Looks like you've missed your target date. No worries! 
+                            Keep adding to that progress and your reward waits regardless!
+                        </p>
+                        <p>Progress: {goal.progress}/{goal.target}</p>
+                        <button className="single-step" onClick={(e) => this.onIncrementClick(goal.progress, goal.id)}>Single Step!</button>
+                        <Link to={`/goaledit/${goal.id}`}>Edit</Link>
+                        <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
+                    </div>
                 )
             }
             else {
@@ -80,12 +62,15 @@ export class Goals extends React.Component {
                 const readableDate = targetDate.toDateString()
                 return(
                     <div className="goal" key={index}>
-                        <h2>Title: {goal.title}</h2>
-                        <p>Description: {goal.description}</p>
-                        <p>To be finished by: {readableDate}</p>
+                        <p className="app-speak">Title: </p>
+                        <p>{goal.title}</p>
+                        <p className="app-speak">Description: </p>
+                        <p>{goal.description}</p>
+                        <p className="app-speak">To be finished by: </p>
+                        <p>{readableDate}</p>
                         <p>Progress: {goal.progress}/{goal.target}</p>
-                        <button onClick={(e) => this.onIncrementClick(goal.progress, goal.id)}>Single Step!</button>
-                        <button><Link to={`/goaledit/${goal.id}`}>Edit</Link></button>
+                        <button className="single-step" onClick={(e) => this.onIncrementClick(goal.progress, goal.id)}>Single Step!</button>
+                        <Link to={`/goaledit/${goal.id}`}>Edit</Link>
                         <button onClick={(e) => this.onDeleteClick(goal.id)}>Delete</button>
                     </div>
                 )
@@ -95,9 +80,9 @@ export class Goals extends React.Component {
         //     return <Redirect to='/' />
         // }
             return (
-                <div className="goal-list">
+                <section className="goal-list">
                     {goalList}
-                </div>
+                </section>
             )
     }
 }

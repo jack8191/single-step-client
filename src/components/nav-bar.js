@@ -11,29 +11,33 @@ export class NavBar extends React.Component {
     }
 
     render() {
-        // Only render the log out button if we are logged in
         let logOutButton
         let navLinks
         if (this.props.authToken !== null) {
             logOutButton = (
-                <button onClick={(e) => this.logOut()}>Log out</button>
+                <button onClick={(e) => this.logOut()}>Log Out</button>
                 );
             navLinks = (
                 <div className='nav-links'>
-                    <button><Link to={'/goals'}>Goal List</Link></button>
-                    <button><Link to={'/create'}>Create a New Goal</Link></button>
+                    <Link to={'/goals'}>Goal List</Link>
+                    <Link to={'/create'}>Create Goal</Link>
                 </div>
             )
             return (
                 <div className="nav-bar">
-                <h1>Single Step</h1>
-                {logOutButton}
-                {navLinks}
+                    <h1>Single Step</h1>
+                    {navLinks}
+                    {logOutButton}
                 </div>
             )
         }
         else if (this.props.authToken === null) {
-            return <Redirect to='/' />
+            return (
+                <header>
+                    <h1>Single Step</h1>
+                    <Redirect to='/' />
+                </header>
+            )
         }
         else { 
             return null
@@ -42,7 +46,6 @@ export class NavBar extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    //loggedIn: state.auth.currentUser !== null,
     authToken: state.auth.authToken
 });
 

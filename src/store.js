@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth-reducers';
-import {setAuthToken, refreshAuthToken, storeAuthInfo} from './actions/auth';
+import {storeAuthInfo} from './actions/auth';
 import {appReducer} from './reducers/app-reducers'
 
 const store = createStore(
@@ -19,8 +19,6 @@ const store = createStore(
 const authToken = loadAuthToken();
 if (authToken) {
     const token = authToken;
-    // store.dispatch(setAuthToken(token));
-    // store.dispatch(refreshAuthToken());
     storeAuthInfo(authToken, store.dispatch)
 }
 

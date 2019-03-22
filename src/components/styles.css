@@ -1,0 +1,154 @@
+
+
+
+/*Site Stiles*/
+*{ 
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    background:rgb(12, 6, 109);
+    color: white;
+    line-height: 1.55;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+
+
+
+button, a{
+    display:inline-block;
+    padding:10px;
+    border:0.1em solid #FFFFFF;
+    margin: 10px;
+    font-family: inherit;
+    font: inherit;
+    border-radius:0.12em;
+    text-decoration:none;
+    font-weight:300;
+    background:rgb(12, 6, 109);
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    max-width: 300px;
+    box-shadow: 10px 10px#000000;
+    }
+    button:hover, a:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+    }
+/* @media all and (max-width:30em){
+    button{
+        display:block;
+        margin:0.4em auto;
+    }
+} */
+
+nav {
+    width: 100%;
+}
+
+.nav-links {
+    display: inline-block;
+}
+.nav-bar>button {
+    max-width: 150px;
+    display: inline-block;
+}
+
+.nav-links>a {
+    max-width: 150px;
+    display: inline-block;
+}
+
+.single-step {
+    background-color: orangered;
+    color: black;
+}
+
+.single-step:hover {
+    background-color: yellow;
+}
+
+h1 { 
+    font-size: 46px; 
+    font-weight: 100; 
+    line-height: 50px; 
+    letter-spacing: 1px; 
+    padding: 15px; 
+    margin: 0px;
+}
+
+h2 {
+    font-size: 23px; 
+    font-weight: 100; 
+    line-height: 50px; 
+    letter-spacing: 1px; 
+    padding: 20px; 
+}
+
+p {
+    padding: 5px;
+    text-align: left;
+}
+
+form {
+    max-width: 500px;
+    margin: auto;
+}
+
+label {
+    text-align: center;
+    display: block;
+    margin-bottom: .5rem;
+    padding: 12px 12px 12px 0;
+}
+
+input, select, textarea {
+    text-align: center;
+    width: 75%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-top: 5px;
+    background-color: rgb(12, 6, 109);
+    color: #FFFFFF;
+    box-shadow: 5px 5px #000000;
+    font-size: inherit;
+}
+.goal-list {
+    width: 80%;
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+.goal {
+    /* display: block; */
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 6px;  
+    box-shadow: 5px 5px #000000;
+    flex: auto;
+}
+
+.app-speak {
+    font-weight: bold;
+    font-size: 115%;
+}
+
+.landing {
+    padding: 5px;
+}
+
+
+
+

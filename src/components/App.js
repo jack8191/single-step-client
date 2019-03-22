@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {refreshAuthToken} from '../actions/auth';
+import './styles.css'
 
 import {
-  BrowserRouter as Router,
   Route,
-  Redirect,
-  Link,
   withRouter
 } from 'react-router-dom'
 
@@ -49,10 +47,10 @@ stopPeriodicRefresh() {
   render() {
     return (
       <div className="App">
-        {/* <header className="App-header">
-        </header> */}
-        <main>
+        <nav className="App-nav" aria-live="polite">
           <NavBar />
+        </nav>
+        <main aria-live="polite">
           <Route exact path="/" component={LandingPage}/>
           <Route exact path="/create" component={GoalCreationPage}/>
           <Route exact path="/goals" component={Goals}/>
@@ -65,10 +63,6 @@ stopPeriodicRefresh() {
   }
 }
 
-// const mapStateToProps = state => ({
-//   hasAuthToken: state.auth.authToken !== null,
-//   loggedIn: state.auth.currentUser !== null
-// });withRouter(connect(mapStateToProps)
 
 const mapStateToProps = state => ({
   hasAuthToken: state.auth.authToken !== null,

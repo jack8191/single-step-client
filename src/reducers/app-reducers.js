@@ -37,13 +37,11 @@ export const appReducer = (state=initialState, action) => {
     else if(action.type === actions.EDIT_GOAL_SUCCESS) {
         const newGoalList = state.goals.map(function(goal) {
             if (goal.id === action.goal.id) {
-                console.log(goal)
                 return action.goal
             }
             else {
                 return goal
             }
-            console.log(newGoalList)
         })
         return {
             ...state,

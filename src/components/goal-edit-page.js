@@ -13,32 +13,27 @@ export class GoalEditPage extends React.Component {
         this.props.dispatch(fetchGoals(this.props.currentUser.username))
     }
     render() {
-        // if(this.props.goalEditSuccessful) {
-        //     return <Redirect to="/goals"/>
-        // }
-        // const targetDate = this.props.goalToEdit.targetDate
-
-        // const completionYear = targetDate.getFullYear()
-        // const completionMonth = targetDate.getMonth()
-        // const completionDay = targetDate.getDate()
-
         const targetDate = new Date(this.props.goalToEdit.targetDate)
         const readableDate = targetDate.toDateString()
         if (this.props.goalEditSuccessful) {
             return <Redirect to="/goals"/>
         }
         return (
-            <div className="goalEdit">
+            <section className="goalEdit">
                 <div className="preEditGoal goal">
-                    <h2>Title: {this.props.goalToEdit.title}</h2>
-                    <p>Description: {this.props.goalToEdit.description}</p>
-                    <p>To be completed by: {readableDate}</p>
+                    <p className="app-speak">Title: </p>
+                    <p>{this.props.goalToEdit.title}</p>
+                    <p className="app-speak">Description: </p>
+                    <p>{this.props.goalToEdit.description}</p>
+                    <p className="app-speak">To be completed by: {readableDate}</p>
                     <p>Current progress: {this.props.goalToEdit.progress}</p>
                     <p>Completion goal: {this.props.goalToEdit.target}</p>
-                    <p>Reward: {this.props.goalToEdit.reward}</p>
+                    <p className="app-speak">Reward: </p>
+                    {this.props.goalToEdit.reward}
                 </div>
+                <p>Enter changes to as many items as you want.</p>
                 <GoalEditForm goalId={this.props.goalToEdit.id} authToken={this.props.authToken}/>
-            </div>
+            </section>
         )
     }
 }
@@ -46,8 +41,6 @@ export class GoalEditPage extends React.Component {
 const mapStateToProps = (state, props) => {
     const goalId = props.match.params.goalId
     const goal = state.app.goals.find(goal => goal.id === goalId)
-    // console.log(goalId)
-    // console.log(goal)
     return {
         authToken: state.auth.authToken,
         currentUser: state.auth.currentUser,

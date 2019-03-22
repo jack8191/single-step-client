@@ -11,10 +11,10 @@ export function GoalCreationPage(props) {
     
     else {
         return (
-            <div className="goalSubmission">
-                <h2>Ready to make a new goal?</h2>
+            <section className="goalSubmission">
+                <h2>Ready to make a new goal? All fields are required.</h2>
                 <GoalCreationForm />
-            </div>
+            </section>
         )}
 }
 

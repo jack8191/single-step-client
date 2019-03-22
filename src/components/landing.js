@@ -1,16 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {Redirect, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export function LandingPage(props) {
-    // if(props.loggedIn) {
-    //     return <Redirect to="/goals" />
-    // }
     return(
-        <div className="landing">
-            <h2>Welcome to Single Step</h2>
-            <h3>A platform for creating and tracking personal goals</h3>
+        <section className="landing">
+            <header>
+                <h2>A platform for creating and tracking personal goals</h2>
+            </header>
             <p>It looks like you're either new, not logged in right now, or want to reread
                 this page! If so, you're in the right place!
             </p>
@@ -42,7 +40,7 @@ export function LandingPage(props) {
                 Remember, the journey of a thousand miles begins with...
                 A cliche!
             </p>
-        </div>
+        </section>
     )
 }
 
