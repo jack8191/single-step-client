@@ -3,7 +3,7 @@ import {Field, reduxForm} from 'redux-form'
 import Input from './input'
 import {connect} from 'react-redux'
 import {submitNewGoal} from '../actions/app-actions'
-import {required, nonEmpty, isTrimmed, notZero} from '../validators'
+import {required, nonEmpty, notZero} from '../validators'
 
 export class GoalCreationForm extends React.Component {
     onSubmit(values) {
@@ -23,14 +23,14 @@ export class GoalCreationForm extends React.Component {
                     component={Input}
                     type="text"
                     name="title"
-                    validate={[required, nonEmpty, isTrimmed]}
+                    validate={[required, nonEmpty]}
                 />
                 <label htmlFor="description">Description</label>
                 <Field
                     component={Input}
                     type="text"
                     name="description"
-                    validate={[required, nonEmpty, isTrimmed]}
+                    validate={[required, nonEmpty]}
                 />
                 <label htmlFor="targetDate">Completion Date</label>
                 <Field
@@ -51,7 +51,7 @@ export class GoalCreationForm extends React.Component {
                     component={Input}
                     type="text"
                     name="reward"
-                    validate={[required, nonEmpty, isTrimmed]}
+                    validate={[required, nonEmpty]}
                 />
                 <button type="submit">Submit</button>
             </form>
