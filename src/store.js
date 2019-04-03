@@ -18,7 +18,7 @@ const store = createStore(
 
 const authToken = loadAuthToken();
 if (authToken) {
-    const token = authToken;
+    //const token = authToken;
     storeAuthInfo(authToken, store.dispatch)
 }
 
